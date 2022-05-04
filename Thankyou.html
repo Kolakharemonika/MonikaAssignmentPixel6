@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank you page</title>
+    <link rel='stylesheet' href='style.css' type='text/css' /> 
+   
+</head>
+<body>
+  <div class="details">
+    <form name="form2" method="post">
+
+ <h5 id="head"> Dear <span id="result-name" > </span>, </h5>
+ <h5> Thank you for inquiry. A 4 digit varification number has been
+    sent to your phone number :<span id="result-phone" style="color: rgb(85, 61, 223);"> </span>
+  , please enter in the followig box and submit for confirmation: </h5>
+
+
+
+<br/>
+<input type="text" id="otpresult" hidden/>  <br/>
+<li class="userotp"><input  type="text6" id="userotp" name="userotp" maxlength="4" 
+    pattern="d{4}" onkeyup="this.value=this.value.replace(/[^\d]/,'')"
+  inputmode="numeric" autocomplete="one-time-code"  required/></li>
+<li> <span style="font-size: 12px; color: red;" id="userEnterotp"></span></li>
+<li>&nbsp;</li>
+
+<li class="validate"><input  type="button1" value="Validate OTP" readonly onclick="validate()"></li>
+<br/>
+<li class="userotp1" ><input type="button1" id="Refresh" readonly value="Back to Home page" onclick="history.back()"> </button></li>
+</form>
+</div>
+
+       <script >
+//as Thankyou page loaded below code will Run --
+     window.addEventListener('load', function () {
+         //by using http GET method - will get fullName & phone number from home page
+    const params = (new URL(document.location)).searchParams;
+    const name = params.get('userName');
+    const matches=name.match(/\b[^\d\s]+\b/g); 
+    //removing special characters & spaces 
+    
+    const phone = params.get('userPhone');
+  var d=phone.replace(/[^\d]/g, "");//removing non-digit letters
+if (d.length==10) {
+    var phonenumber=d.replace(/(\d{3})(\d{3})(\d{4})/,"($1)-$2-$3"); // phone number display like (123)-123-1234
+   const otp=params.get('otpname');
+console.log(otp);
+
+    document.getElementById('result-name').innerHTML = matches[0]; //
+    // first Name store in matches[0] & last name in matches[1] location
+    document.getElementById('result-phone').innerHTML = phonenumber; //display in thankyoupage span-id
+    
+   document.getElementById('otpresult').value = otp;
+}
+else{
+alert("phone number is not valid please GoBack to HOME page & Enter valid PhoneNumber");
+}
+
+})//function eventlisterner end here
+
+var attempt=3; //only 3 attempt to varify phone number
+
+function validate(){
+//copy value of 
+var otpresult =document.getElementById("otpresult").value;
+ 
+ var userotp =document.getElementById("userotp").value;
+
+ var mk=/[\s+]/;
+
+if (userotp==otpresult) {
+   /* if otp is valid then page redirect to" http://pixel6.co/". we use
+"replace" function for redirect page into anather page & user cannot navigate back.
+    */
+  // alert("Validation successful !");
+    document.form2.submit(); 
+   window.location.replace("http://pixel6.co/");
+ 
+
+} else if(userotp=="" || userotp.match(mk)){
+    document.getElementById("userEnterotp").innerHTML="enter valid otp";
+    document.getElementById("userotp").value="";
+return false;
+}
+
+
+else {
+
+    if(attempt==0){
+        //if zero attempt left then form will redirect to pageNotfFound (404 error)
+        window.location.replace("http://pixel6.co/rgrgrrgrrt");
+
+            }
+      else{
+    attempt--; //attempt decrese by one
+    document.getElementById("userEnterotp").innerHTML='invalid OTP. Now only   '+ attempt +'  OTP attempt available ';
+
+    if(attempt==0){
+        // zero attempt left then current window location replace with pageNotfFound (404 error)
+      
+        window.location.replace("http://pixel6.co/rgrgrrgrrt");
+            }
+   
+        }
+}
+   return false;
+  
+ }
+  //end code here  
+  
+</script>
+       
+      
+
+
+</body>
+</html>

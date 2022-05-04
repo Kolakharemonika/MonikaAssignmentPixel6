@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <title>Personal Details Page</title>
+    <link rel='stylesheet' href='style.css' type='text/css' />      
+    <script src="index.js">
+//final code
+    </script>
+
+</head>
+    <body onload="document.form1.userName.focus()">
+
+        <div class="details">
+            <h2 style="text-align: center;">Personal Details Page</h2>
+       
+        <form name="form1"   action="Thankyou.html" method="get">
+            <ul>
+                <li> Full Name : <br/>
+                 <input type="text3" onclick="nameChecker()" id="fulluserName" name="userName"
+                  pattern="[a-z]"  maxlength="25" placeholder="Enter your valid First & Last Name" required="required" /> </li>
+                <li> <span style="font-size:13px; color: red;" id="fullName"></span></li>
+                <li>&nbsp;</li>
+        
+                <li> Email Id: <br/>
+                <input type="email" onclick="userEmailChecker()" id="userEmail" minlength="8" title="emailAddress" name="userEmail"  maxlength="60" pattern="non digit" placeholder="Enter your valid Email-Id" required/></li>
+                <li><span style="font: size 13px; color: red;" id="userEmail1"></span></li>
+                <li>&nbsp;</li>
+
+                <li><label for="telNo"> Mobile Number :</label> </li>
+                <li>   <input type="text6" id="telNo" maxlength="10" onkeydown="this.value=this.value.replace(/[^\d]/,'')"
+                     placeholder="Enter your valid Mobile number here" name="userPhone"  onkeypress="check()"
+                     onkeyup="phonestate()" onclick="phoneChecker()" required /></li>
+
+                     <li>  <span style="font: size 13px; color: red;" id="numPhone"></span>
+                     <span style="font-size: small; color: blue;" id="mylocation1"> </span><label  style="font-size: 13px; color: blue; "  id="mylocation"></label> </li>
+                     
+        <form id="otpform" >
+            <input type="text" id="otpname" name="otpname" hidden /> </form>
+
+           
+            
+  <li><div class="submit">
+    <input type="button" value="submit" onclick="validation()"/>
+    
+    </div>
+
+    </form>
+    </body>
+</html>
